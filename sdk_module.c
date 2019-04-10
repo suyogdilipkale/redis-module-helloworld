@@ -34,9 +34,12 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) 
   //Define your module name and version
   if (RedisModule_Init(ctx, "sdk.module", 1, REDISMODULE_APIVER_1) == REDISMODULE_ERR)
     return REDISMODULE_ERR;
-    
-  //Define your own command and configure your function to process
-  //"readonly": Here you are not writing or modifiying and data, so configure readonly permissions
+  /*
+  RedisModule_CreateCommand() - to register commands into the Redis core
+  Prototype - int RedisModule_CreateCommand(RedisModuleCtx *ctx, const char *name, RedisModuleCmdFunc cmdfunc, const char *strflags, int firstkey, int lastkey, int keystep);
+  Here we define your own command and configure your function to process
+  "readonly" - Here you are not writing or modifiying and data, so configure readonly permissions
+  */
   if (RedisModule_CreateCommand(ctx, "sdk.module.helloworld", HelloWorld, "readonly", 1, 1, 1) == REDISMODULE_ERR)
     return REDISMODULE_ERR;
 
