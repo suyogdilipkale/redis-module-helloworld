@@ -31,6 +31,8 @@ int HelloWorld(RedisModuleCtx *ctx, RedisModuleString **argv,int argc) {
 The Init function announces the Redis core that the module has a given name, its version (that is reported by MODULE LIST), and that is willing to use a specific version of the API.
 If the API version is wrong, the name is already taken, or there are other similar errors, the function will return REDISMODULE_ERR, and the module OnLoad function should return ASAP with an error.
 Before the Init function is called, no other API function can be called, otherwise the module will segfault and the Redis instance will crash
+
+Redis modules API calls all take as first argument the context of the module, so that they have a reference to the module calling it, to the command and client executing a given command, and so forth.
 */
 int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
 
