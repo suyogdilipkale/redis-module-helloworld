@@ -13,12 +13,22 @@ Step 1 - Compile the code
 Step 2 - Include Module to redis (we will use redis-cli, there are other was to to include modules)
 - Make sure you redis server is running (>= redis 5.x)
 - Go to redis-cli
-- Execute MODULE LOAD /path/to/sdk_module.so
+- Execute MODULE LOAD /path/to/sdk_module.o
 
 Step 3 - Test module
 - Go to redis-cli and execute your command
 - 127.0.0.1:6379> sdk.module.helloworld "your input string"
 - "your input string"
 127.0.0.1:6379> 
+
+Example:
+
+suyog@suyog-vm1:~$ redis-cli
+127.0.0.1:6379> module load /home/suyog/redis-module-helloworld/sdk_module.o
+OK
+127.0.0.1:6379> sdk.module.helloworld "Suyog Kale"
+"Suyog Kale"
+127.0.0.1:6379> 
+
 
 * Reference - https://redis.io/topics/modules-intro
