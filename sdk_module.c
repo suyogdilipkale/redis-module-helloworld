@@ -11,7 +11,10 @@ Include C header file called redismodule.h, its an api defination file
 */
 #include "redismodule.h"
 /*
-Your First HelloWorld function which will parse an user entered input and echo back to the user
+To create a new command, It needs the context, the command name, and the function pointer of the function implementing the command, 
+which must have the following prototype:
+Prototype - int mycommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc);
+Here - Your First HelloWorld function which will parse an user entered input and echo back to the user
 */
 int HelloWorld(RedisModuleCtx *ctx, RedisModuleString **argv,int argc) {
   //Return an error if sufficient inputs are not provided
@@ -37,7 +40,7 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) 
   /*
   RedisModule_CreateCommand() - to register commands into the Redis core
   Prototype - int RedisModule_CreateCommand(RedisModuleCtx *ctx, const char *name, RedisModuleCmdFunc cmdfunc, const char *strflags, int firstkey, int lastkey, int keystep);
-  Here we define your own command and configure your function to process
+  Here we define your own command and configure your command function to process
   "readonly" - Here you are not writing or modifiying and data, so configure readonly permissions
   */
   if (RedisModule_CreateCommand(ctx, "sdk.module.helloworld", HelloWorld, "readonly", 1, 1, 1) == REDISMODULE_ERR)
